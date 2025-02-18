@@ -6,7 +6,7 @@
       {
         "id": "ff5dcd4b36dd2d9f",
         "type": "tabs",
-        "dimension": 49.9031007751938,
+        "dimension": 50.064599483204134,
         "children": [
           {
             "id": "f3e2553ea66d2e19",
@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "approvals/доклад.md",
+                "file": "approvals/Доклад.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "доклад"
+              "title": "Доклад"
             }
           }
         ]
@@ -27,7 +27,7 @@
       {
         "id": "b7ed50bb3189e6ad",
         "type": "tabs",
-        "dimension": 50.0968992248062,
+        "dimension": 49.935400516795866,
         "children": [
           {
             "id": "8366ab4193c0348a",
@@ -192,7 +192,10 @@
   },
   "active": "f3e2553ea66d2e19",
   "lastOpenFiles": [
-    "approvals/Замечания по докладу.md",
-    "approvals/доклад.md"
+    "approvals/Доклад.md",
+    "approvals/доклад.md",
+    "approvals/Доклад.md",
+    "approvals/доклад - Copy.md",
+    "approvals/Замечания по докладу.md"
   ]
 }
