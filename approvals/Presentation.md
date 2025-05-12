@@ -227,11 +227,11 @@ public class ApprovalTest
 
 if (IsCiCdEnvironment())
 {
-	Approvals.SetReporter(new QuietReporter());
+	Approvals.SetFrontLoadedReporter(new QuietReporter());
 }
 else
 {
-	Approvals.SetReporter(new DiffReporter());
+	Approvals.SetFrontLoadedReporter(new DiffReporter());
 }
 ```
 
@@ -485,6 +485,7 @@ public static IEnumerable<Transaction> ParseCsv(string filePath)
 Провайдер типа в F# позволяет производить парсинг excel в несколько строчек
 
 - Встроенный провайдер типа в FSharp.Data
+- Библиотека FSharp.ExcelProvider
 - В основном проекте можно подключить и использовать F#- проект, как и любой другой.
 - Данные от БА, превращаются в короткий и наглядный тест 
     - Входные данные можно посмотреть в удобном табличном редакторе, 
