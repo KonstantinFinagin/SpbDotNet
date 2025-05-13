@@ -18,17 +18,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SpbDotNet.Approvals.TestData\SpbDotNet.Approvals.TestData.fsproj" />
     <ProjectReference Include="..\SpbDotNet.Approvals\SpbDotNet.Approvals.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Part2_ApprovalsIntroduced\Results\" />
     <Folder Include="Part3_TableFormatting\Results\" />
+    <Folder Include="Part4_FSharpDataParsing\Results\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Part2_ApprovalsIntroduced\TestWithApprovals_1.Processor_OutputData_IsCorrect.approved.txt">
       <DependentUpon>TestWithApprovals_1.cs</DependentUpon>
+    </None>
+    <None Update="Part4_FSharpDataParsing\TestData\TestData.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

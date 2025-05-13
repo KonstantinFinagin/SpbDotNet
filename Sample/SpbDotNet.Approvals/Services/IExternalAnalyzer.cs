@@ -1,4 +1,4 @@
-﻿using SpbDotNet.Approvals.Model.Complex;
+﻿using SpbDotNet.Approvals.Model;
 
 namespace SpbDotNet.Approvals.Services
 {

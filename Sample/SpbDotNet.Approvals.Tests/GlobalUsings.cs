@@ -1,7 +1,7 @@
 ﻿global using ApprovalTests.Namers;
 global using ApprovalTests.Reporters;
 global using SpbDotNet.Approvals.Helpers;
-global using SpbDotNet.Approvals.Model.Complex;
+global using SpbDotNet.Approvals.Model;
 global using SpbDotNet.Approvals.Services;
 global using SpbDotNet.Approvals.Tests.Mocks;
 global using System.Text.Json;

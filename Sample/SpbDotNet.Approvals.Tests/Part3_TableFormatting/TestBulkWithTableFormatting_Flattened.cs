@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
+using SpbDotNet.Approvals.Model;
 using SpbDotNet.Approvals.Tests.Helpers;
 
 namespace SpbDotNet.Approvals.Tests.Part3_TableFormatting

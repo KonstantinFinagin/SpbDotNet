@@ -1,4 +1,4 @@
-﻿namespace SpbDotNet.Approvals.Model.Complex
+﻿namespace SpbDotNet.Approvals.Model
 {
     public class OutputData
     {

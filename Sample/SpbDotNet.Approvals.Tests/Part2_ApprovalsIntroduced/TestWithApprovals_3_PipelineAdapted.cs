@@ -1,4 +1,6 @@
-﻿namespace SpbDotNet.Approvals.Tests.Part2_ApprovalsIntroduced
+﻿using SpbDotNet.Approvals.Model;
+
+namespace SpbDotNet.Approvals.Tests.Part2_ApprovalsIntroduced
 {
     [UseApprovalSubdirectory("Results")]
     public class TestWithApprovals_3_PipelineAdapted
