@@ -30,10 +30,10 @@ namespace SpbDotNet.Approvals.Services
             {
                 UserId = input.UserId,
                 NormalizedInput = normalized,
-                InputLength = normalized.Length,
+                InputLength = normalized.Length + 1,
                 ContainsDigits = normalized.Any(char.IsDigit),
                 ReversedInput = reversed,
-                ProcessedAt = DateTimeWrapper.UtcNow,
+                ProcessedAt = DateTime.UtcNow, // TODO DateTime Wrapper
                 Hash = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(normalized)), // simple hash
                 IsPalindrome = normalized == reversed,
                 Metadata = new InputMetadata

@@ -22,6 +22,8 @@ namespace SpbDotNet.Approvals.Tests.Part3_TableFormatting
             var analyzer = AnalyzerMocks.GetAnalyzerMock();
             var processor = new Processor(analyzer);
 
+            DateTimeWrapper.Set(() => DateTime.Parse("2024-01-01"));
+
             // Act
             var results = processor.ProcessBulk(inputs);
 

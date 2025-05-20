@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Part0_HelloWorld\" />
     <Folder Include="Part2_ApprovalsIntroduced\Results\" />
     <Folder Include="Part3_TableFormatting\Results\" />
     <Folder Include="Part4_FSharpDataParsing\Results\" />

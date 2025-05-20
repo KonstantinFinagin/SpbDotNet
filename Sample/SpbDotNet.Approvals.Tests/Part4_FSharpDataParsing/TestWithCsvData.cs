@@ -12,9 +12,10 @@ namespace SpbDotNet.Approvals.Tests.Part4_FSharpDataParsing
         {
             // Arrange
             var inputs = ExcelDataHelper.GetInputDataItems("Part4_FSharpDataParsing/TestData/TestData.xlsx");
-
             var analyzer = AnalyzerMocks.GetAnalyzerMock();
             var processor = new Processor(analyzer);
+
+            DateTimeWrapper.Set(() => new DateTime(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc));
 
             // Act
             var results = processor.ProcessBulk(inputs);

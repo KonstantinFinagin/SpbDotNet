@@ -11,6 +11,7 @@ namespace SpbDotNet.Approvals.Tests.Part2_ApprovalsIntroduced
         {
             // Arrange
             DateTimeWrapper.Set(() => new DateTime(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc));
+
             var analyzer = AnalyzerMocks.GetAnalyzerMock();
             var processor = new Processor(analyzer);
             var input = new InputData(1, " Hello123 ");
@@ -19,10 +20,11 @@ namespace SpbDotNet.Approvals.Tests.Part2_ApprovalsIntroduced
             var result = processor.Process(input);
 
             // Assert
+            // JSON because object.ToString()
             ApprovalTests.Approvals.Verify(SerializeToJson(result));
         }
 
-        private string SerializeToJson(OutputData data)
+        private string SerializeToJson(object data)
         {
             return JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
         }

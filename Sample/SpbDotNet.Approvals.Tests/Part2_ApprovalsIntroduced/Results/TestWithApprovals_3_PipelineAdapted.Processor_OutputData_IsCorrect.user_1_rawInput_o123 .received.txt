@@ -1,0 +1,31 @@
+﻿{
+  "UserId": 1,
+  "NormalizedInput": "hello123",
+  "InputLength": 9,
+  "ContainsDigits": true,
+  "ReversedInput": "321olleh",
+  "ProcessedAt": "2024-01-01T12:00:00Z",
+  "Hash": "aGVsbG8xMjM=",
+  "IsPalindrome": false,
+  "RawProcessingLog": "Processing data for 1: lorem ipsum",
+  "Metadata": {
+    "VowelCount": 2,
+    "ConsonantCount": 3,
+    "CharFrequency": {
+      "h": 1,
+      "e": 1,
+      "l": 2,
+      "o": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1
+    }
+  },
+  "ExternalInfo": {
+    "Category": "mocked",
+    "Score": 0.9,
+    "Tags": {
+      "type": "test"
+    }
+  }
+}
