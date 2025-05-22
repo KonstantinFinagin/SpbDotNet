@@ -447,17 +447,18 @@ MemberData полезен для генерации комбинаций (как
 ```csharp
 [Theory]
 [MemberData(nameof(GetCheckTableData))]
-public void TestTableCaseN(double value1, double value2, ..., double result)
+public void TestTableCaseN(InputData data)
 {
     ...
 }
 
 private static IEnumerable<object[]> GetCheckTableData()
 {
-    /// динамически конструируем данные для проверки в отдельном методе
-    foreach(...)
+    var lines = GetLinesFromFile("...");
+    foreach(var line in lines)
     {
-        yield return new object[] { value1, value2, ..., valueResult }
+        var inputData = GetInputDataFromCsv(line);
+        yield return new object[] { InputData = parsed }
     }
 }
 ```
@@ -577,6 +578,28 @@ Response:
 ]
 ```
 
+```csharp
+[Fact]
+public async Task GetPositionsForMultipleContracts()
+{
+    var requestPath = "./DevCases/Data/MultipleContractsApiRequest.csv";
+    var responsePath = "./DevCases/Data/MultipleContractsApiResponse.csv";
+
+    var apiData = UnitTestDataHelper.GetPositionKeepingCheckTransactions(responsePath);
+
+    var request = JsonSerializer.Deserialize<PositionGetRequest>(File.ReadAllText(requestPath));
+
+    _transactionApiMock
+        .Setup(m => m.GetTransactionAmountsByFilterAsync(
+            It.Is<TransactionAmountsGetRequest>(r => 
+                r.Filters.Contains($"ContractId==2076|2078|2079"))))
+        .ReturnsAsync(apiData.ToList());
+    
+    var result = await _positionService.GetPositionsAsync(request);
+
+    ApprovalTestHelper.Verify(result);
+}
+```
 ---
 
 - Зеленые тесты и 100%-е покрытие не гарантируют отсутствие багов. 
