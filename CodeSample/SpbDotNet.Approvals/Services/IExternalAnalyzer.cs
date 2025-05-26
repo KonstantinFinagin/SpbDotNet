@@ -1,9 +1,8 @@
 ﻿using SpbDotNet.Approvals.Model;
 
-namespace SpbDotNet.Approvals.Services
+namespace SpbDotNet.Approvals.Services;
+
+public interface IExternalAnalyzer
 {
-    public interface IExternalAnalyzer
-    {
-        ExternalAnalysis Analyze(string normalizedInput, int userId);
-    }
+    ExternalAnalysis Analyze(string normalizedInput, int userId);
 }

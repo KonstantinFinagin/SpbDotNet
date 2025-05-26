@@ -1,73 +1,73 @@
-﻿namespace SpbDotNet.Approvals.Tests.Helpers
+﻿namespace SpbDotNet.Approvals.Tests.Helpers;
+
+public static class AsciiTableFormatter
 {
-    public static class AsciiTableFormatter
+    public static string Format(IEnumerable<object> items)
     {
-        public static string Format(IEnumerable<object> items)
+        if (items == null || !items.Any())
+            return "No data.";
+
+        var properties = items.First().GetType().GetProperties();
+        var headers = properties.Select(p => p.Name).ToArray();
+        var rows = items.Select(item => properties.Select(p => FormatValue(p.GetValue(item))).ToArray()).ToArray();
+        var columnWidths = CalculateColumnWidths(headers, rows);
+        var sb = new StringBuilder();
+
+        AppendTable(sb, headers, rows, columnWidths);
+
+        return sb.ToString();
+    }
+
+    private static string FormatValue(object value) =>
+        value switch
         {
-            if (items == null || !items.Any())
-                return "No data.";
+            DateTime dt => dt.ToString("s"),
+            IDictionary<string, object> dictionary => FormatDictionary(dictionary),
+            IDictionary<string, string> dictionary => FormatDictionary(dictionary),
+            IDictionary<string, int> intDictionary => FormatDictionary(intDictionary),
+            IDictionary<char, int> charDictionary => FormatDictionary(charDictionary),
+            IList<object> list => FormatList(list),
+            _ => value?.ToString() ?? "" // default case
+        };
 
-            var properties = items.First().GetType().GetProperties();
-            var headers = properties.Select(p => p.Name).ToArray();
-            var rows = items.Select(item => properties.Select(p => FormatValue(p.GetValue(item))).ToArray()).ToArray();
-            var columnWidths = CalculateColumnWidths(headers, rows);
-            var sb = new StringBuilder();
+    private static string FormatDictionary<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
+        string.Join(", ", dictionary.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
 
-            AppendTable(sb, headers, rows, columnWidths);
+    private static string FormatList(IList<object> list) => string.Join(", ", list);
 
-            return sb.ToString();
-        }
+    private static int[] CalculateColumnWidths(string[] headers, string[][] rows)
+    {
+        // Calculate the max width for each column
+        return headers
+            .Select((header, i) => Math.Max(header.Length, rows.Select(row => row[i].Length).DefaultIfEmpty().Max()))
+            .ToArray();
+    }
 
-        private static string FormatValue(object value) =>
-            value switch
-            {
-                IDictionary<string, object> dictionary => FormatDictionary(dictionary),
-                IDictionary<string, string> dictionary => FormatDictionary(dictionary),
-                IDictionary<string, int> intDictionary => FormatDictionary(intDictionary),
-                IDictionary<char, int> charDictionary => FormatDictionary(charDictionary),
-                IList<object> list => FormatList(list),
-                _ => value?.ToString() ?? "" // default case
-            };
+    private static void AppendTable(StringBuilder sb, string[] headers, string[][] rows, int[] columnWidths)
+    {
+        // Build the table and append to the StringBuilder
+        string separator = BuildSeparator(columnWidths);
 
-        private static string FormatDictionary<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
-            string.Join(", ", dictionary.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
+        sb.AppendLine(separator);
+        AppendRow(sb, headers, columnWidths);
+        sb.AppendLine(separator);
 
-        private static string FormatList(IList<object> list) => string.Join(", ", list);
+        foreach (var row in rows)
+            AppendRow(sb, row, columnWidths);
 
-        private static int[] CalculateColumnWidths(string[] headers, string[][] rows)
-        {
-            // Calculate the max width for each column
-            return headers
-                .Select((header, i) => Math.Max(header.Length, rows.Select(row => row[i].Length).DefaultIfEmpty().Max()))
-                .ToArray();
-        }
+        sb.AppendLine(separator);
+    }
 
-        private static void AppendTable(StringBuilder sb, string[] headers, string[][] rows, int[] columnWidths)
-        {
-            // Build the table and append to the StringBuilder
-            string separator = BuildSeparator(columnWidths);
+    private static string BuildSeparator(int[] columnWidths)
+    {
+        // Build the separator line for the table
+        return "+-" + string.Join("-+-", columnWidths.Select(w => new string('-', w))) + "-+";
+    }
 
-            sb.AppendLine(separator);
-            AppendRow(sb, headers, columnWidths);
-            sb.AppendLine(separator);
-
-            foreach (var row in rows)
-                AppendRow(sb, row, columnWidths);
-
-            sb.AppendLine(separator);
-        }
-
-        private static string BuildSeparator(int[] columnWidths)
-        {
-            // Build the separator line for the table
-            return "+-" + string.Join("-+-", columnWidths.Select(w => new string('-', w))) + "-+";
-        }
-
-        private static void AppendRow(StringBuilder sb, string[] row, int[] columnWidths)
-        {
-            // Format and append a single row to the StringBuilder
-            string rowStr = "| " + string.Join(" | ", row.Select((cell, i) => cell.PadRight(columnWidths[i]))) + " |";
-            sb.AppendLine(rowStr);
-        }
+    private static void AppendRow(StringBuilder sb, string[] row, int[] columnWidths)
+    {
+        // Format and append a single row to the StringBuilder
+        string rowStr = "| " + string.Join(" | ", row.Select((cell, i) => cell.PadRight(columnWidths[i]))) + " |";
+        sb.AppendLine(rowStr);
     }
 }

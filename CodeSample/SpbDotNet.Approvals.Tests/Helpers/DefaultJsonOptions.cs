@@ -1,14 +1,13 @@
-﻿namespace SpbDotNet.Approvals.Tests.Mocks
+﻿namespace SpbDotNet.Approvals.Tests.Helpers;
+
+public static class DefaultJsonOptions
 {
-    public static class DefaultJsonOptions
+    static DefaultJsonOptions()
     {
-        static DefaultJsonOptions()
+        Indented = new JsonSerializerOptions
         {
-            Indented = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-        }
-        public static JsonSerializerOptions Indented { get; }
+            WriteIndented = true
+        };
     }
+    public static JsonSerializerOptions Indented { get; }
 }
