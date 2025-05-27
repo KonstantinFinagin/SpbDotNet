@@ -1,4 +1,5 @@
-﻿using SpbDotNet.Approvals.Model;
+﻿using SpbDotNet.Approvals.Helpers;
+using SpbDotNet.Approvals.Model;
 
 namespace SpbDotNet.Approvals.Services;
 
@@ -25,7 +26,7 @@ public class Processor
     {
         var normalized = input.RawInput?.Trim().ToLowerInvariant() ?? "";
         var reversed = new string(normalized.Reverse().ToArray());
-        var vowels = "aeiou";
+        var vowels = "aeiouAEIOU";
         var charFreq = normalized.GroupBy(c => c)
                                  .ToDictionary(g => g.Key, g => g.Count());
 
@@ -39,10 +40,10 @@ public class Processor
         {
             UserId = input.UserId,
             NormalizedInput = normalized,
-            InputLength = normalized.Length + 1,
+            InputLength = normalized.Length,
             ContainsDigits = normalized.Any(char.IsDigit),
             ReversedInput = reversed,
-            ProcessedAt = DateTime.UtcNow, // TODO DateTime Wrapper
+            ProcessedAt = DateTimeWrapper.UtcNow,
             Hash = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(normalized)), // simple hash
             IsPalindrome = normalized == reversed,
             Metadata = new InputMetadata

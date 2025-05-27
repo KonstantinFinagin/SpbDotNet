@@ -7,4 +7,4 @@ global using System.Text.Json;
 global using NSubstitute;
 global using System.Text;
 global using SpbDotNet.Approvals.Tests.Helpers;
-global using VerifyXunit;
+global using Xunit;
