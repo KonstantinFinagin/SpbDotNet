@@ -12,6 +12,7 @@ public class TestWithExcelData
         // Arrange
         var inputs = ExcelDataHelper
             .GetInputDataItems("Part4_FSharpDataParsing/TestData/TestData.xlsx");
+
         var analyzer = AnalyzerMocks.GetAnalyzerMock();
         var processor = new Processor(analyzer);
 

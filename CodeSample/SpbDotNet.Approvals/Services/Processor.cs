@@ -19,12 +19,12 @@ public class Processor
 
     public string SayHelloWorld()
     {
-        return "Hello, world!";
+        return "Hello, world123";
     }
 
     public OutputData Process(InputData input)
     {
-        var normalized = input.RawInput?.Trim().ToLowerInvariant() ?? "";
+        var normalized = input.RawInput?.Trim().ToUpperInvariant() ?? "";
         var reversed = new string(normalized.Reverse().ToArray());
         var vowels = "aeiouAEIOU";
         var charFreq = normalized.GroupBy(c => c)

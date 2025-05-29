@@ -2,7 +2,7 @@
 
 [UseReporter(typeof(DiffReporter))]
 [UseApprovalSubdirectory("Results")]
-public class TestBulkWithTableFormattingVerify
+public class TestBulkWithTableFormatting
 {
     [Fact]
     public void Approves_BulkOutput_AsAsciiTable()
